@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<body></body>
+
+<textarea rows="40" cols="40" spellcheck="false" id="textarea" placeholder="paste your list here..."></textarea>
+<br><button id="button" onclick="start()">shuffle</button>
+<br><br><input type="text" id="text" maxlength="4" size="2">
+<br><button id="button" onclick="display()">display</button>
+<p id="result"></p>
+
+<script>
+this.preRandom = [];
+this.randomArray = [];
+this.textArea = document.getElementById("textarea");
+this.text = document.getElementById("text");
+
+function start(){
+  preRandom = textArea.value.split("\n");
+  randomArray = shuffleArray(preRandom);
+  console.log(randomArray);
+  textArea.value = null;
+  preTextArea = "";
+  for (i=0;i<randomArray.length;i++){
+    if (i == randomArray.length - 1)
+    {
+      preTextArea += randomArray[i];
+    } else
+    preTextArea += randomArray[i] + "\n";
+  }
+  textArea.value = preTextArea;
+}
+
+function display(){
+  textValue = text.value;
+  displayText = "";
+  for (i=0;i<textValue;i++)
+  {
+    displayText += randomArray[i] + " <button onclick=\"window.open('" + randomArray[i] + "')\"> Open </button>" + "<br>";
+  }
+  document.getElementById("result").innerHTML = displayText;
+}
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+</script>
+
+
+</body>
+</html>
